@@ -3,6 +3,10 @@ const model = require("mongoose") ;
 
 
 const n = mongoose.Schema({
+    id : {
+        type : String,
+        required : true 
+    },
     name : {
         type : String,
         required : true 
