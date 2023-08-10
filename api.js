@@ -38,18 +38,23 @@ app.post("/signin" ,(req,res) =>{
 })
 
 //login 
+app.get("/login" , (req,res) => { 
+    res.send("Enter your login details");
+})
 
-app.get("/login" ,(req, res) => {
+
+app.post("/login" ,(req, res) => {
     const {name,email,password} = req.body;
     const user = names.find({email}).then((result) =>{
         if(result){
-            res.json(result);
+            // res.json(result);
+            res.send("login successful")
         }
         else{
             res.send("No user found")
         }
     }).catch((err) => { 
-        res.send(err) ;
+        res.status(404).send("Invalid credentials")
     })
   });
 
