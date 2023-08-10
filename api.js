@@ -26,15 +26,32 @@ app.post("/signin" ,(req,res) =>{
     
     const {name,email,password} = req.body ; //destructure
     const newuser = names({
+        id : req.body.id ,
         name : req.body.name , 
         email : req.body.email , 
         password : req.body.password , 
     })
  
     newuser.save() ; //save in database
-    res.json()
+    res.status(200).json({message : "signin succesfull"}) ;
+    res.send("Auth complete")
 })
 
+//login 
+
+app.get("/login" ,(req, res) => {
+    const {name,email,password} = req.body;
+    const user = names.find({email}).then((result) =>{
+        if(result){
+            res.json(result);
+        }
+        else{
+            res.send("No user found")
+        }
+    }).catch((err) => { 
+        res.send(err) ;
+    })
+  });
 
 app.listen(3000,()=>{
     console.log("3000 port is working") ;
